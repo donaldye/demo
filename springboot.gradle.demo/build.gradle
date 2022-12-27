@@ -1,0 +1,47 @@
+/*
+https://medium.com/@unknown.underme/how-to-setup-java-spring-boot-using-gradle-in-intellij-community-edition-39aad7edb1ad
+or https://www.jetbrains.com/idea/guide/tutorials/your-first-spring-application/creating-spring-boot-application/
+very smooth, click Gradle sync icon to download added or updated jars to user local .gradle/
+tomcat is used as the default web server
+to test, run the main method, then
+http://localhost:8080/connect
+
+manual Gradle project: https://spring.io/guides/gs/gradle/
+
+how to reload a class without restarting the server:
+in debug mode,
+Run/Debug actions->Reload Changed classes
+
+ */
+
+plugins {
+    id 'org.springframework.boot' version '2.4.5'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+}
+
+test {
+    useJUnitPlatform()
+}
